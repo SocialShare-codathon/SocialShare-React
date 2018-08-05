@@ -20,11 +20,35 @@ export default class App extends Component {
     this.state = { username: null };
   }
 
+  handleClick(e) {
+    console.log("Button clicked");
+    e.preventDefault()
+    window.location = "/api/facebook/auth";
+  }
+
+  getProfile(e) {
+    e.preventDefault();
+    window.location = "/api/get_fb_profile";
+  }
   componentDidMount() {
-    fetch('/api/facebook/auth').then((res) => {
-      console.log(res.json);
-      res.json();
-    });
+    
+    // const msg = loginTab('/api/facebook/auth');
+    // msg.then(out => console.log(out));
+
+
+    // fetch('/api/facebook/auth', { method: 'GET', redirect: 'manual'}).then((res) => {
+    //   console.log(res);
+    //   fetch('/api/get_fb_profile').then((res) =>{console.log(res)})
+    // });
+    // .then((json) => {
+    //   console.log(json);
+    //   // if(json.success) {
+    //   // fetch('/api/facebook/callback?url=' + json.url).then((res) => {
+    //   //   console.log(res.json());
+    //   // });}
+    //   }
+
+
     // .then(user => this.setState({ username: user.username }));
   }
 
@@ -37,7 +61,10 @@ export default class App extends Component {
 Hello Ashika! Good Morning! Have a Great day!
           </h1>
         </Jumbotron>
-
+        <button onClick={this.handleClick}>
+Login with facebook</button>
+<button onClick={this.getProfile}>
+Get Facebook profile</button>
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">
             {' '}
