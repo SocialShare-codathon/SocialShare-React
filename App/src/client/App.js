@@ -13,43 +13,47 @@ import {
   Label,
   Input
 } from 'reactstrap';
-
+/* eslint class-methods-use-this: ["error",
+{ "exceptMethods": ["getProfile","handleClick", "postOnWall", "loginLinkedIn", "getLinkedInProfile"] }] */
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = { username: null };
   }
 
-  handleClick(e) {
-    console.log("Button clicked");
-    e.preventDefault()
-    window.location = "/api/facebook/auth";
-  }
-
   getProfile(e) {
     e.preventDefault();
-    window.location = "/api/get_fb_profile";
+    window.location = '/api/get_fb_profile';
   }
-  componentDidMount() {
-    
-    // const msg = loginTab('/api/facebook/auth');
-    // msg.then(out => console.log(out));
 
+  handleClick(e) {
+    console.log('Button clicked');
+    e.preventDefault();
+    window.location = '/api/facebook/auth';
+  }
 
-    // fetch('/api/facebook/auth', { method: 'GET', redirect: 'manual'}).then((res) => {
-    //   console.log(res);
-    //   fetch('/api/get_fb_profile').then((res) =>{console.log(res)})
-    // });
-    // .then((json) => {
-    //   console.log(json);
-    //   // if(json.success) {
-    //   // fetch('/api/facebook/callback?url=' + json.url).then((res) => {
-    //   //   console.log(res.json());
-    //   // });}
-    //   }
+  postOnWall(e) {
+    e.preventDefault();
+    fetch('/api/linkedin/post', {
+      method: 'POST',
+      credentials: 'same-origin',
+      body: JSON.stringify({ text: 'How is everyone today?' }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(response => console.log('Success:', response));
+  }
 
+  loginLinkedIn(e) {
+    e.preventDefault();
+    window.location = '/api/linkedin/auth';
+  }
 
-    // .then(user => this.setState({ username: user.username }));
+  getLinkedInProfile(e) {
+    e.preventDefault();
+    window.location = '/api/linkedin/info';
   }
 
   render() {
@@ -61,10 +65,6 @@ export default class App extends Component {
 Hello Ashika! Good Morning! Have a Great day!
           </h1>
         </Jumbotron>
-        <button onClick={this.handleClick}>
-Login with facebook</button>
-<button onClick={this.getProfile}>
-Get Facebook profile</button>
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">
             {' '}
@@ -92,10 +92,22 @@ Text Area
             </Label>
             <Input type="textarea" name="text" id="contentText" rows={5} />
           </FormGroup>
-          <Button>
-Post
+          <Button onClick={this.postOnWall} color="primary" size="lg">
+            Post
           </Button>
         </Form>
+        <Button onClick={this.handleClick} color="primary">
+          Login with facebook
+        </Button>
+        <Button onClick={this.getProfile} color="info">
+          Get Facebook profile
+        </Button>
+        <Button onClick={this.loginLinkedIn} color="primary">
+          Login with Linkedin
+        </Button>
+        <Button onClick={this.getLinkedInProfile} color="info">
+          Get Linkedin profile
+        </Button>
       </div>
     );
   }
