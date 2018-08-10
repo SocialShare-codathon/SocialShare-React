@@ -71,22 +71,11 @@ app.get(
   })
 );
 
-// app.get('/api/get_fb_profile', (req, res) => {
-//   FB.setAccessToken(user.accessToken);
-//   FB.api('/me/accounts', (pages) => {
-//     const data = pages.data.map(page => ({
-//       name: page.name,
-//       id: page.id
-//     }));
-//     res.json([...data]);
-//   });
-// });
-
 app.get('/api/get_fb_profile', (req, res) => {
   console.log(JSON.stringify(user.accessToken));
 
   FB.setAccessToken(user.accessToken);
-  FB.api('1797629126938200/feed', (feed) => {
+  FB.api('me/feed', (feed) => {
     console.log(feed);
   });
   FB.api('/me/accounts', (acc) => {
@@ -94,19 +83,19 @@ app.get('/api/get_fb_profile', (req, res) => {
   });
 });
 
-app.post('/api/post_to_fb', (req, res) => {
-  console.log(req.body.text);
-  console.log(JSON.stringify(user.accessToken));
-  FB.setAccessToken(user.accessToken);
-  FB.api('1797629126938200/feed', 'post', { message: req.body.text }, (post) => {
-    console.log(post);
-    if (!post || post.error) {
-      console.log(!post ? 'error occurred' : post.error);
-      return;
-    }
-    console.log(`Post Id: ${post.id}`);
-  });
-  res.send('Post Successful');
-});
+// app.post('/api/post_to_fb', (req, res) => {
+//   console.log(req.body.text);
+//   console.log(JSON.stringify(user.accessToken));
+//   FB.setAccessToken(user.accessToken);
+//   FB.api('1797629126938200/feed', 'post', { message: req.body.text }, (post) => {
+//     console.log(post);
+//     if (!post || post.error) {
+//       console.log(!post ? 'error occurred' : post.error);
+//       return;
+//     }
+//     console.log(`Post Id: ${post.id}`);
+//   });
+//   res.send('Post Successful');
+// });
 
-app.listen(8080, () => console.log('Listening on port 8080!'));
+// app.listen(8080, () => console.log('Listening on port 8080!'));

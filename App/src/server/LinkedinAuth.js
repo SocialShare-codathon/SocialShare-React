@@ -12,6 +12,8 @@ const user = {
 };
 
 const express = require('express');
+const http = require('http');
+const https = require('https');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 
@@ -33,7 +35,7 @@ passport.use(
       clientID: linkedinInfo.clientId,
       clientSecret: linkedinInfo.clientKey,
       callbackURL: linkedinInfo.callbackUrl,
-      scope: ['r_emailaddress', 'r_basicprofile'],
+      scope: ['r_emailaddress', 'r_basicprofile', 'w_share', 'rw_company_admin'],
       state: true
     },
     (accessToken, refreshToken, profile, done) => {
@@ -77,16 +79,6 @@ app.get(
   }
 );
 
-// app.get('api/linkedin/info', (req, res) => {
-//   console.log('API called!');
-//   request.get('https://api.linkedin.com/v1/people/~?format=json', (error, response, body) => {
-//     console.log('error:', error); // Print the error if one occurred
-//     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-//     console.log('body:', body);
-//   });
-//   res.send();
-// });
-
 app.get('/api/linkedin/info', (req, res) => {
   request.get(
     `https://api.linkedin.com/v1/people/~:(id,current-share)?format=json&oauth2_access_token=${
@@ -105,19 +97,31 @@ app.get('/api/linkedin/info', (req, res) => {
 });
 
 app.post('/api/linkedin/post', (req, res) => {
-  request.post(
-    `https://api.linkedin.com/v1/people/~/shares?format=json&oauth2_access_token${
-      user.accessToken
-    }`,
-    req,
-    (error, resp, body) => {
-      if (error) {
-        return console.error('upload failed:', error);
-      }
-      console.log('Upload successful!  Server responded with:', body);
-      res.send(body);
-    }
-  );
+  const options = {
+    method: 'POST',
+    url: 'https://api.linkedin.com/v1/people/~/shares',
+    qs: {
+      format: 'json',
+      access_token: user.accessToken
+    },
+    headers: {
+      'postman-token': 'e3f2c8c7-4627-a88b-010b-ccd45208a77c',
+      'cache-control': 'no-cache',
+      'content-type': 'application/json',
+      authorization: `Bearer ${user.accessToken}`
+    },
+    body: {
+      comment: 'My first post using LinkedIn REST API and node.js',
+      visibility: { code: 'anyone' }
+    },
+    json: true
+  };
+
+  request(options, (error, response, body) => {
+    if (error) throw new Error(error);
+
+    console.log(body);
+  });
 });
 
 app.listen(8080, () => console.log('Listening on port 8080 for linkedIn auth!'));

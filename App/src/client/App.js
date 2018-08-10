@@ -26,24 +26,9 @@ export default class App extends Component {
     window.location = '/api/get_fb_profile';
   }
 
-  handleClick(e) {
-    console.log('Button clicked');
+  getLinkedInProfile(e) {
     e.preventDefault();
-    window.location = '/api/facebook/auth';
-  }
-
-  postOnWall(e) {
-    e.preventDefault();
-    fetch('/api/linkedin/post', {
-      method: 'POST',
-      credentials: 'same-origin',
-      body: JSON.stringify({ text: 'How is everyone today?' }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => res.json())
-      .then(response => console.log('Success:', response));
+    window.location = '/api/linkedin/info';
   }
 
   loginLinkedIn(e) {
@@ -51,9 +36,30 @@ export default class App extends Component {
     window.location = '/api/linkedin/auth';
   }
 
-  getLinkedInProfile(e) {
+  postOnWall(e) {
     e.preventDefault();
-    window.location = '/api/linkedin/info';
+    fetch('/api/linkedin/post', {
+      method: 'POST',
+      credentials: 'same-origin',
+      body: JSON.stringify({
+        comment: 'Post testing',
+        visibility: {
+          code: 'anyone'
+        }
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        'x-li-format': 'json'
+      }
+    })
+      .then(res => res.json())
+      .then(response => console.log('Success:', response));
+  }
+
+  handleClick(e) {
+    console.log('Button clicked');
+    e.preventDefault();
+    window.location = '/api/facebook/auth';
   }
 
   render() {
@@ -62,7 +68,7 @@ export default class App extends Component {
         <Jumbotron>
           <h1>
             {' '}
-Hello Ashika! Good Morning! Have a Great day!
+Hello! Good Morning! Have a Great day!
           </h1>
         </Jumbotron>
         <Navbar color="light" light expand="md">
@@ -97,7 +103,7 @@ Text Area
           </Button>
         </Form>
         <Button onClick={this.handleClick} color="primary">
-          Login with facebook
+          Login with Facebook
         </Button>
         <Button onClick={this.getProfile} color="info">
           Get Facebook profile
