@@ -38,7 +38,7 @@ export default class App extends Component {
 
   postOnWall(e) {
     e.preventDefault();
-    fetch('/api/linkedin/post', {
+    fetch('/api/post_to_fb', {
       method: 'POST',
       credentials: 'same-origin',
       body: JSON.stringify({

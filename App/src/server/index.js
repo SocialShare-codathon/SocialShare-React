@@ -11,7 +11,8 @@ const user = {
   name: String,
   email: String,
   facebookID: String,
-  accessToken: String
+  accessToken: String,
+  pageToken: [String]
 };
 
 const express = require('express');
@@ -78,12 +79,31 @@ app.get('/api/get_fb_profile', (req, res) => {
   console.log(JSON.stringify(user.accessToken));
 
   FB.setAccessToken(user.accessToken);
-  FB.api('me/feed', (feed) => {
-    console.log(feed);
-  });
-  FB.api('/me/accounts', (acc) => {
+  FB.api('/1797629126938200?fields=name,id,access_token', (acc) => {
+    user.pageToken = acc.access_token;
+    console.log(user.pageToken);
     res.send(acc);
   });
+});
+
+app.post('/api/post_to_fb', (req, res) => {
+  console.log(user.pageToken);
+  FB.api(
+    '1797629126938200/feed',
+    'POST',
+    {
+      message: 'Posting using FB Graph API',
+      access_token: user.pageToken
+    },
+    (response) => {
+      if (response && !response.error) {
+        /* handle the result */
+        console.log(response);
+      } else {
+        console.log(response.error);
+      }
+    }
+  );
 });
 
 // app.post('/api/post_to_fb', (req, res) => {
