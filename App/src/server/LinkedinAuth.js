@@ -1,6 +1,6 @@
 const linkedinInfo = {
-  clientId: '86vhvjnur9ld7n',
-  clientKey: 'LDBY9mGyVUouBY4L',
+  clientId: '86oos9zi77gl7h',
+  clientKey: 'FU2FDiPbaOP3vj05',
   callbackUrl: 'http://localhost:3000/api/linkedin/callback'
 };
 
@@ -125,21 +125,3 @@ app.post('/api/linkedin/post', (req, res) => {
 });
 
 app.listen(8080, () => console.log('Listening on port 8080 for linkedIn auth!'));
-
-/*
-{
-   "currentShare": {
-     "author": {
-       "firstName": "Ashika",
-       "id": "1NTEyv41QM",
-       "lastName": "Kasiviswanathan"
-     },
-     "comment": "It has been really helpful. Made a huge difference in my communication, problem-solving ability and confidence.",
-     "id": "s6418208361191481344",
-     "source": {"serviceProvider": {"name": "LI_BADGE"}},
-     "timestamp": 1530220117853,
-     "visibility": {"code": "anyone"}
-   },
-   "id": "1NTEyv41QM"
- }
- */

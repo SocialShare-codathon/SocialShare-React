@@ -3,7 +3,7 @@
 
 const fbInfo = {
   appId: '638447646525666',
-  appSecret: '232b2c67a028c78978f56776af3c9d32',
+  appSecret: 'd53581858390a0f0a4b8ece60d152dce',
   callbackURL: 'http://localhost:3000/api/facebook/callback'
 };
 
@@ -121,4 +121,4 @@ app.post('/api/post_to_fb', (req, res) => {
 //   res.send('Post Successful');
 // });
 
-app.listen(8080, () => console.log('Listening on port 8080!'));
+app.listen(8080, () => console.log('Listening on port 8080 for FB!'));

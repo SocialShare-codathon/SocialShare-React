@@ -1,6 +1,9 @@
+// const linkedIn = require('./LinkedinAuth');
+// const facebook = require('./FacebookAuth');
+
 const fbInfo = {
   appId: '638447646525666',
-  appSecret: '232b2c67a028c78978f56776af3c9d32',
+  appSecret: 'd53581858390a0f0a4b8ece60d152dce',
   callbackURL: 'http://localhost:3000/api/facebook/callback'
 };
 
@@ -8,7 +11,8 @@ const user = {
   name: String,
   email: String,
   facebookID: String,
-  accessToken: String
+  accessToken: String,
+  pageToken: [String]
 };
 
 const express = require('express');
@@ -75,12 +79,31 @@ app.get('/api/get_fb_profile', (req, res) => {
   console.log(JSON.stringify(user.accessToken));
 
   FB.setAccessToken(user.accessToken);
-  FB.api('me/feed', (feed) => {
-    console.log(feed);
-  });
-  FB.api('/me/accounts', (acc) => {
+  FB.api('/1797629126938200?fields=name,id,access_token', (acc) => {
+    user.pageToken = acc.access_token;
+    console.log(user.pageToken);
     res.send(acc);
   });
+});
+
+app.post('/api/post_to_fb', (req, res) => {
+  console.log(user.pageToken);
+  FB.api(
+    '1797629126938200/feed',
+    'POST',
+    {
+      message: 'Posting using FB Graph API',
+      access_token: user.pageToken
+    },
+    (response) => {
+      if (response && !response.error) {
+        /* handle the result */
+        console.log(response);
+      } else {
+        console.log(response.error);
+      }
+    }
+  );
 });
 
 // app.post('/api/post_to_fb', (req, res) => {
@@ -98,4 +121,4 @@ app.get('/api/get_fb_profile', (req, res) => {
 //   res.send('Post Successful');
 // });
 
-// app.listen(8080, () => console.log('Listening on port 8080!'));
+app.listen(8080, () => console.log('Listening on port 8080 for FB!'));
