@@ -4,6 +4,7 @@ import { Table, Button } from 'reactstrap';
 class Profile extends Component {
   render() {
     return (
+      // todo: add layout + button similar to web sample
       <Table>
         <thead>
           <tr>

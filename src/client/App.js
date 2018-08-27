@@ -49,7 +49,12 @@ class App extends Component {
     return (
       <div className="container">
         <Navigation />
-        <Profile />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/profile" component={Profile} />
+        </Switch>
       </div>
     );
   }

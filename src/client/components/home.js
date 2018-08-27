@@ -74,7 +74,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="bg-info clearfix" style={{ padding: '.5rem' }}>
         <Form>
           <FormGroup className="m-2">
             <Label for="content">
@@ -109,13 +109,13 @@ Successfully posted!
           <Button onClick={this.handleClick} color="primary">
             Login with Facebook
           </Button>
-          <Button onClick={this.getProfile} color="info">
+          <Button onClick={this.getProfile} color="secondary">
             Get Facebook profile
           </Button>
           <Button onClick={this.loginLinkedIn} color="primary">
             Login with Linkedin
           </Button>
-          <Button onClick={this.getLinkedInProfile} color="info">
+          <Button onClick={this.getLinkedInProfile} color="secondary">
             Get Linkedin profile
           </Button>
         </Row>
