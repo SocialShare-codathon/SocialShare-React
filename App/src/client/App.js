@@ -1,29 +1,58 @@
-import React, { Component } from "react";
-import "./app.css";
-import ReactImage from "./react.png";
+import React, { Component } from 'react';
+import { Route, Link, Switch } from 'react-router-dom';
+import {
+  Jumbotron, Navbar, NavbarBrand, Nav, NavItem, NavLink
+} from 'reactstrap';
+import Home from './components/home';
+import Login from './components/login';
+import Signup from './components/signup';
+import Profile from './components/profile';
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { username: null };
-  }
-
-  componentDidMount() {
-    fetch("/api/getUsername")
-      .then(res => res.json())
-      .then(user => this.setState({ username: user.username }));
-  }
-
+const Navigation = () => (
+  <div>
+    <Navbar color="light" light expand="md">
+      <NavbarBrand>
+        <Link to="/">
+          {' '}
+Social Share
+          {' '}
+        </Link>
+      </NavbarBrand>
+      <Nav className="ml-auto" navbar>
+        <NavItem>
+          <NavLink>
+            <Link to="/signup">
+Sign Up
+            </Link>
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink>
+            <Link to="/login">
+Login
+            </Link>
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink>
+            <Link to="/profile">
+My Profile
+            </Link>
+          </NavLink>
+        </NavItem>
+      </Nav>
+    </Navbar>
+  </div>
+);
+class App extends Component {
   render() {
     return (
-      <div>
-        {this.state.username ? (
-          <h1>Hello {this.state.username}</h1>
-        ) : (
-          <h1>Loading.. please wait!</h1>
-        )}
-        <img src={ReactImage} alt="react" />
+      <div className="container">
+        <Navigation />
+        <Profile />
       </div>
     );
   }
 }
+
+export default App;
