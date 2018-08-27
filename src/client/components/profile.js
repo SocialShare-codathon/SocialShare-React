@@ -26,7 +26,7 @@ Delete
         <tbody>
           <tr>
             <th scope="row">
-Pic
+              <img src="../profile-pic.png" />
             </th>
             <td>
 Facebook
