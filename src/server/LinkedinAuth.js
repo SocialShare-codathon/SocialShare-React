@@ -1,6 +1,6 @@
 const linkedinInfo = {
-  clientId: '86ajusm8xzjjew',
-  clientKey: 'Nhdk2H6qkfKCS24G',
+  clientId: ' ',
+  clientKey: ' ',
   callbackUrl: 'http://localhost:3000/api/linkedin/callback'
 };
 
