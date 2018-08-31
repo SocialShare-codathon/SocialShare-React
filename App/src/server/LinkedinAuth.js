@@ -1,6 +1,6 @@
 const linkedinInfo = {
-  clientId: '86ajusm8xzjjew',
-  clientKey: 'Nhdk2H6qkfKCS24G',
+  clientId: '86oos9zi77gl7h',
+  clientKey: 'FU2FDiPbaOP3vj05',
   callbackUrl: 'http://localhost:3000/api/linkedin/callback'
 };
 
@@ -111,7 +111,7 @@ app.post('/api/linkedin/post', (req, res) => {
       authorization: `Bearer ${user.accessToken}`
     },
     body: {
-      comment: 'test 1',
+      comment: 'My first post using LinkedIn REST API and node.js',
       visibility: { code: 'anyone' }
     },
     json: true

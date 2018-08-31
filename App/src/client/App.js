@@ -6,7 +6,6 @@ import {
 import Home from './components/home';
 import Login from './components/login';
 import Signup from './components/signup';
-import Profile from './components/profile';
 
 const Navigation = () => (
   <div>
@@ -33,13 +32,6 @@ Login
             </Link>
           </NavLink>
         </NavItem>
-        <NavItem>
-          <NavLink>
-            <Link to="/profile">
-My Profile
-            </Link>
-          </NavLink>
-        </NavItem>
       </Nav>
     </Navbar>
   </div>
@@ -49,7 +41,11 @@ class App extends Component {
     return (
       <div className="container">
         <Navigation />
-        <Profile />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+        </Switch>
       </div>
     );
   }

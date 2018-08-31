@@ -1,30 +1,17 @@
 import React, { Component } from 'react';
 import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Row,
-  Modal,
-  ModalBody,
-  ModalFooter
+  Button, Form, FormGroup, Label, Input, Row
 } from 'reactstrap';
 
-// /* eslint class-methods-use-this: ["error",
-// {
-//   "exceptMethods": ["getProfile","handleClick", "postOnWall", "loginLinkedIn", "getLinkedInProfile"]
-// }] */
+/* eslint class-methods-use-this: ["error",
+{
+  "exceptMethods": ["getProfile","handleClick", "postOnWall", "loginLinkedIn", "getLinkedInProfile"]
+}] */
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      username: null,
-      modal: false
-    };
-
-    this.postOnWall = this.postOnWall.bind(this);
+    this.state = { username: null };
   }
 
   getProfile(e) {
@@ -44,7 +31,7 @@ class Home extends Component {
 
   postOnWall(e) {
     e.preventDefault();
-    fetch('/api/linkedin/post', {
+    fetch('/api/post_to_fb', {
       method: 'POST',
       credentials: 'same-origin',
       body: JSON.stringify({
@@ -60,10 +47,6 @@ class Home extends Component {
     })
       .then(res => res.json())
       .then(response => console.log('Success:', response));
-
-    this.setState({
-      modal: !this.state.modal
-    });
   }
 
   handleClick(e) {
@@ -82,27 +65,9 @@ Input Message
             </Label>
             <Input type="textarea" name="text" id="contentText" rows={5} />
           </FormGroup>
-
-          <Button color="primary" onClick={this.postOnWall}>
-            {this.props.buttonLabel}
+          <Button onClick={this.postOnWall} color="primary" className="float-right">
             Post
           </Button>
-
-          <Modal
-            isOpen={this.state.modal}
-            toggle={this.postOnWall}
-            className={this.props.className}
-          >
-            <ModalBody>
-Successfully posted!
-            </ModalBody>
-
-            <ModalFooter>
-              <Button color="success" onClick={this.postOnWall}>
-                Ok
-              </Button>
-            </ModalFooter>
-          </Modal>
         </Form>
 
         <Row>
