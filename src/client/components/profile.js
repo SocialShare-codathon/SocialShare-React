@@ -5,75 +5,89 @@ class Profile extends Component {
   render() {
     return (
       // todo: add layout + button similar to web sample
-      <Table>
-        <thead>
-          <tr>
-            <th>
+      <div>
+        <Button color="primary">
+Add Facebook Account
+        </Button>
+        {' '}
+        <Button color="success">
+Add Linkedin Account
+        </Button>
+        {' '}
+        <Button color="info">
+Add Twitter Account
+        </Button>
+        {' '}
+        <Table>
+          <thead>
+            <tr>
+              <th>
 Profile Pic
-            </th>
-            <th>
+              </th>
+              <th>
 Account
-              {' '}
-            </th>
-            <th>
+                {' '}
+              </th>
+              <th>
 Username
-            </th>
-            <th>
+              </th>
+              <th>
 Delete
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">
-              <img src="../profile-pic.png" />
-            </th>
-            <td>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">
+                <img src="images/fb-logo.png" alt="facebook" />
+              </th>
+              <td>
 Facebook
-            </td>
-            <td>
+              </td>
+              <td>
 Username
-            </td>
-            <td>
-              <Button color="danger">
+              </td>
+              <td>
+                <Button color="danger">
 Remove Account
-              </Button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-Pic
-            </th>
-            <td>
+                </Button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <img src="images/linkedin-logo.png" alt="linkedin" />
+              </th>
+              <td>
 Linkedin
-            </td>
-            <td>
+              </td>
+              <td>
 Username
-            </td>
-            <td>
-              <Button color="danger">
+              </td>
+              <td>
+                <Button color="danger">
 Remove Account
-              </Button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">
-Pic
-            </th>
-            <td>
+                </Button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <img src="images/twitter-logo.png" alt="twitter" />
+              </th>
+              <td>
 Twitter
-            </td>
-            <td>
+              </td>
+              <td>
 Username
-            </td>
-            <td>
-              <Button color="danger">
+              </td>
+              <td>
+                <Button color="danger">
 Remove Account
-              </Button>
-            </td>
-          </tr>
-        </tbody>
-      </Table>
+                </Button>
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </div>
     );
   }
 }
