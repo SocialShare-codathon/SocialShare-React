@@ -23,11 +23,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 
-// const fbInfo = {
-//   appId: '638447646525666',
-//   appSecret: 'd53581858390a0f0a4b8ece60d152dce',
-//   callbackURL: 'http://localhost:3000/api/facebook/callback'
-// };
+const app = express();
 
 const logger = function (req, res, next) {
   console.log(`GOT REQUEST ! ${req.url}`);
